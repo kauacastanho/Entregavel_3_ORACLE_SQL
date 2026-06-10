@@ -35,3 +35,10 @@ CREATE TABLE pedido_itens_e3 (
     FOREIGN KEY (id_produto) 
     REFERENCES produtos_e3(id)
 );
+
+CREATE TABLE log_erros (
+    id NUMBER GENERATED AS IDENTITY PRIMARY KEY,
+    pedido_id NUMBER NOT NULL,
+    data_erro DATE NOT NULL,
+    mensagem_erro VARCHAR2(200)
+);
