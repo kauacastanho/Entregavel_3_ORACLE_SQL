@@ -1,13 +1,34 @@
--- PACOTE INCOMPLETO, MAS NA IDEIA
-
-
 CREATE OR REPLACE PACKAGE clientes_pkg AS
     FUNCTION inativo(p_id_cliente IN NUMBER) RETURN CHAR;
-    PROCEDURE inativar_clientes;
+    PROCEDURE inativar_clientes(p_id_cliente IN NUMBER);
 END;
 /
 
 CREATE OR REPLACE PACKAGE BODY clientes_pkg AS
+
+    -- Procedure que inativa clientes se a função inativo() for verdadeira
+    PROCEDURE inativar_clientes (
+        p_id_cliente NUMBER
+    )IS
+        v_ativo NUMBER;
+    BEGIN
+        SELECT ativo 
+        INTO v_ativo
+        FROM clientes_e3
+        WHERE id = p_id_cliente;
+        
+        IF v_ativo = 1 THEN
+            UPDATE clientes_e3 SET ativo = 0 WHERE id = p_id_cliente;
+        END IF;
+        
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                DBMS_OUTPUT.PUT_LINE('Cliente ' || p_id_cliente || ' não encontrado');
+
+            WHEN OTHERS THEN
+                DBMS_OUTPUT.PUT_LINE('Erro ao inativar cliente: ' || SQLERRM);
+    END;
+
     -- Função que retorna V caso o cliente não tenha pedidos nos últimos 365 dias
     FUNCTION inativo (
         p_id_cliente NUMBER
@@ -28,21 +49,6 @@ CREATE OR REPLACE PACKAGE BODY clientes_pkg AS
         END IF;
     END;
     
-    -- Procedure que inativa clientes se a função inativo() for verdadeira
-    PROCEDURE inativar_clientes (
-        p_id_cliente NUMBER
-    )IS
-        v_ativo NUMBER;
-    BEGIN
-        SELECT ativo 
-        INTO v_ativo
-        FROM clientes_e3
-        WHERE id = p_id_cliente;
-        
-        IF v_ativo = 1 THEN
-            UPDATE clientes_e3 SET ativo = 0 WHERE id = p_id_cliente;
-        END IF;
-    END;
 END clientes_pkg;
 /
 
