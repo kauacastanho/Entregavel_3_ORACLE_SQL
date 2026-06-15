@@ -52,25 +52,30 @@ CREATE OR REPLACE PACKAGE BODY faturamento_pkg AS
     )IS
         v_total_pedido NUMBER := 0;
     BEGIN 
-        
-        FOR item IN (SELECT id_produto, quantidade, preco_unit FROM pedido_itens_e3 WHERE id_pedido = p_id_pedido) LOOP    
-            
-            IF verificar_estoque(item.id_produto, item.quantidade) = 'V' THEN
-                UPDATE produtos_e3
-                SET estoque = estoque - item.quantidade
-                WHERE id = item.id_produto;
+    
+        FOR item IN (SELECT id_produto, quantidade FROM pedido_itens_e3 WHERE id_pedido = p_id_pedido) LOOP
 
-                v_total_pedido := v_total_pedido + (item.preco_unit * item.quantidade);
-
-            ELSE
-                msg_erro := 'Estoque insuficiente para o produto ' || item.id_produto;
+            IF verificar_estoque(item.id_produto, item.quantidade) = 'F' THEN
+                msg_erro := 'Pedido ' || p_id_pedido || ': estoque insuficiente para o produto ' || item.id_produto;
                 registrar_falha(p_id_pedido);
-
+                DBMS_OUTPUT.PUT_LINE(msg_erro);
+                
+                RETURN;
             END IF;
 
         END LOOP;
-        
-        DBMS_OUTPUT.PUT_LINE('Total do pedido: R$ ' || v_total_pedido);
+
+       FOR item IN (SELECT id_produto, quantidade, preco_unit FROM pedido_itens_e3 WHERE id_pedido = p_id_pedido) LOOP
+
+            UPDATE produtos_e3
+            SET estoque = estoque - item.quantidade
+            WHERE id = item.id_produto;
+
+            v_total_pedido := v_total_pedido + (item.preco_unit * item.quantidade);
+
+        END LOOP;
+
+        DBMS_OUTPUT.PUT_LINE('Pedido ' || p_id_pedido || ' - Total: R$ ' || v_total_pedido);
 
         COMMIT;
 
@@ -79,11 +84,9 @@ CREATE OR REPLACE PACKAGE BODY faturamento_pkg AS
                 msg_erro := SQLERRM;
                 registrar_falha(p_id_pedido);
                 ROLLBACK;
-                DBMS_OUTPUT.PUT_LINE('Erro ao processar pedido: ' || SQLERRM);
+                DBMS_OUTPUT.PUT_LINE('Erro ao processar pedido: ' || p_id_pedido || ' ' || SQLERRM);
     END;
 
 END faturamento_pkg;
 /
-
-
 
