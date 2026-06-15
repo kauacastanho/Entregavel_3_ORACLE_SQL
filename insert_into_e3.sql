@@ -12,7 +12,7 @@ INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Bruno Rocha
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Juliana Alves', 'juliana.alves@email.com', DATE '2025-02-03', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Gustavo Martins', 'gustavo.martins@email.com', DATE '2025-02-05', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Patricia Gomes', 'patricia.gomes@email.com', DATE '2025-02-07', 1);
-INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Thiago Ribeiro', 'thiago.ribeiro@email.com', DATE '2025-02-10', 0);
+INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Thiago Ribeiro', 'thiago.ribeiro@email.com', DATE '2025-02-10', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Camila Freitas', 'camila.freitas@email.com', DATE '2025-02-12', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Diego Carvalho', 'diego.carvalho@email.com', DATE '2025-02-15', 1);
 
