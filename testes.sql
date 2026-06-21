@@ -1,4 +1,3 @@
--- Processando pedidos
 BEGIN
     KAUA_20261.faturamento_pkg.processar_pedido(1);
     KAUA_20261.faturamento_pkg.processar_pedido(9);
@@ -11,7 +10,6 @@ BEGIN
 END;   
 / 
  
--- Verificando os clientes que devem ser inativados
 DECLARE
     v_resultado CHAR;
 BEGIN
@@ -23,7 +21,6 @@ BEGIN
 END;
 /
 
--- Inativando clientes
 DECLARE
     v_apoio CHAR;
 BEGIN
