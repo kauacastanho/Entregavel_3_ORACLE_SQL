@@ -1,5 +1,3 @@
-
--- CLIENTES
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('João Silva', 'joao.silva@email.com', DATE '2025-01-10', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Maria Souza', 'maria.souza@email.com', DATE '2025-01-12', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Pedro Santos', 'pedro.santos@email.com', DATE '2025-01-15', 1);
@@ -16,7 +14,7 @@ INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Thiago Ribe
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Camila Freitas', 'camila.freitas@email.com', DATE '2025-02-12', 1);
 INSERT INTO clientes_e3 (nome, email, data_cadastro, ativo) VALUES ('Diego Carvalho', 'diego.carvalho@email.com', DATE '2025-02-15', 1);
 
--- PRODUTOS
+
 INSERT INTO produtos_e3 (nome, preco, estoque) VALUES ('Notebook', 3500, 15);
 INSERT INTO produtos_e3 (nome, preco, estoque) VALUES ('Mouse', 80, 100);
 INSERT INTO produtos_e3 (nome, preco, estoque) VALUES ('Teclado', 150, 50);
@@ -38,7 +36,7 @@ INSERT INTO produtos_e3 (nome, preco, estoque) VALUES ('Processador', 1800, 10);
 INSERT INTO produtos_e3 (nome, preco, estoque) VALUES ('Cooler', 120, 30);
 INSERT INTO produtos_e3 (nome, preco, estoque) VALUES ('Estabilizador', 200, 15);
 
--- PEDIDOS
+
 INSERT INTO pedidos_e3 (id_cliente, data_pedido) VALUES (1, DATE '2026-03-01');
 INSERT INTO pedidos_e3 (id_cliente, data_pedido) VALUES (2, DATE '2026-03-01');
 INSERT INTO pedidos_e3 (id_cliente, data_pedido) VALUES (3, DATE '2025-03-02');
@@ -93,7 +91,7 @@ INSERT INTO pedidos_e3 (id_cliente, data_pedido) VALUES (3, DATE '2025-03-26');
 INSERT INTO pedidos_e3 (id_cliente, data_pedido) VALUES (4, DATE '2025-03-26');
 INSERT INTO pedidos_e3 (id_cliente, data_pedido) VALUES (5, DATE '2025-03-27');
 
--- PEDIDOS_ITENS
+
 INSERT INTO pedido_itens_e3 (id_pedido, id_produto, quantidade, preco_unit) VALUES (1,1,1,3500);
 INSERT INTO pedido_itens_e3 (id_pedido, id_produto, quantidade, preco_unit) VALUES (1,2,2,80);
 
